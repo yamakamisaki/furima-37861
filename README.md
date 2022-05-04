@@ -1,17 +1,15 @@
-## userテーブル
+## usersテーブル
 
 | Column              | Type    | Options                        |
 | ------------------- | ------- | ------------------------------ |
+| nickname            | string  | null: false |
 | email               | string  | null: false | unique: true |
 | encrypted_password  | string  | null: false |
-| first_name_hiragana | string  | null: false |
-| last_name_hiragana  | string  | null: false |
-| first_name_katakana | string  | null: false |
-| last_name_katakana  | string  | null: false |
-| nickname            | string  | null: false |
-| birth_year          | integer | null: false |
-| birth_month         | integer | null: false |
-| birth_day           | integer | null: false |
+| first_name          | string  | null: false |
+| last_name           | string  | null: false |
+| first_name_kana     | string  | null: false |
+| last_name_kana      | string  | null: false |
+| birthday            | date    | null: false |
 
 
 ### Association
@@ -20,19 +18,19 @@
 
 
 
-## itemテーブル
+## itemsテーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| title       | string     | null: false |
-| text        | text       | null: false |
-| category    | integer    | null: false |
-| condition   | integer    | null: false |
-| shipping_fee| integer    | null: false |
-| prefectures | integer    | null: false |
-| send_day    | integer    | null: false |
-| price       | integer    | null: false |
-| user        | references | foreign_key: true | null: false |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| title         | string     | null: false |
+| text          | text       | null: false |
+| category      | integer    | null: false |
+| condition     | integer    | null: false |
+| shipping_fee  | integer    | null: false |
+| prefecture_id | integer    | null: false |
+| send_day      | integer    | null: false |
+| price         | integer    | null: false |
+| user          | references | foreign_key: true | null: false |
 
 ＊image = Active Storage 使用のためカラム追加なし
 ＊category/condition/shipping_fee/prefectures/send_day = ActiveHash 使用のため integer で取得
@@ -43,7 +41,7 @@
 
 
 
-## buyerテーブル
+## buyersテーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -58,13 +56,14 @@
 - belongs_to :item
 - has_one :address
 
-## テーブル
+## addressesテーブル
 
 | Column             | Type      | Options                        |
 | ------------------ | --------- | ------------------------------ |
 | postal_code        | integer   | null: false |
-| prefectures        | integer   | null: false |
+| prefecture_id        | integer   | null: false |
 | city               | string    | null: false |
+| home_address       | string    | null: false |
 | building_name      | string    | 
 | telephone_number   | integer   | null: false |
 | buyer              | references| foreign_key: true | null: false |
