@@ -20,17 +20,17 @@
 
 ## itemsテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| title         | string     | null: false |
-| text          | text       | null: false |
-| category      | integer    | null: false |
-| condition     | integer    | null: false |
-| shipping_fee  | integer    | null: false |
-| prefecture_id | integer    | null: false |
-| send_day      | integer    | null: false |
-| price         | integer    | null: false |
-| user          | references | foreign_key: true | null: false |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| title          | string     | null: false |
+| text           | text       | null: false |
+| category_id    | integer    | null: false |
+| condition_id   | integer    | null: false |
+| shipping_fee_id| integer    | null: false |
+| prefecture_id  | integer    | null: false |
+| send_day_id    | integer    | null: false |
+| price          | integer    | null: false |
+| user           | references | foreign_key: true | null: false |
 
 ＊image = Active Storage 使用のためカラム追加なし
 ＊category/condition/shipping_fee/prefectures/send_day = ActiveHash 使用のため integer で取得
@@ -60,12 +60,12 @@
 
 | Column             | Type      | Options                        |
 | ------------------ | --------- | ------------------------------ |
-| postal_code        | integer   | null: false |
-| prefecture_id        | integer   | null: false |
+| postal_code        | string    | null: false |
+| prefecture_id      | integer   | null: false |
 | city               | string    | null: false |
 | home_address       | string    | null: false |
 | building_name      | string    | 
-| telephone_number   | integer   | null: false |
+| telephone_number   | string    | null: false |
 | buyer              | references| foreign_key: true | null: false |
 
 ＊building_name のみ 空欄可
