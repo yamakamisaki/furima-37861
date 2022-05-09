@@ -1,4 +1,8 @@
 class BuyerAddress
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :prefecture
+
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id,
                 :city, :home_address, :building_name, :telephone_number, :buyer_id
