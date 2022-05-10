@@ -3,7 +3,8 @@ class BuyerAddress
 
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id,
-                :city, :home_address, :building_name, :telephone_number, :buyer_id
+                :city, :home_address, :building_name, 
+                :telephone_number, :buyer_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -12,6 +13,7 @@ class BuyerAddress
     validates :city
     validates :home_address
     validates :telephone_number, format: {with: /\A[0-9]{10,11}\z/}
+    validates :token
   end
     # ActiveHashのid:1は保存できない  { id: 1, name: '--' }
     validates :prefecture_id, numericality: { other_than: 1 }
