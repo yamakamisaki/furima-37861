@@ -1,7 +1,5 @@
 class BuyerAddress
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefecture
 
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id,
@@ -14,7 +12,6 @@ class BuyerAddress
     validates :city
     validates :home_address
     validates :telephone_number, format: {with: /\A[0-9]{10,11}\z/}
-    validates :buyer_id
   end
     # ActiveHashのid:1は保存できない  { id: 1, name: '--' }
     validates :prefecture_id, numericality: { other_than: 1 }
