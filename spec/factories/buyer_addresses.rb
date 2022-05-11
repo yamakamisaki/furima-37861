@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :buyer_address do
-    user_id          { 1 }
-    item_id          { 5 }
     postal_code      { '123-4567' }
     prefecture_id    { 2 }
     city             { 'A市' }

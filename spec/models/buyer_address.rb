@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe BuyerAddress, type: :model do
   before do
-    @buyer_address = FactoryBot.build(:buyer_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @buyer_address = FactoryBot.build(:buyer_address, user_id: user.id, item_id: item.id)
+    sleep 0.1
   end
 
   describe '商品購入機能' do
@@ -63,6 +66,16 @@ RSpec.describe BuyerAddress, type: :model do
       end
       it 'telephone_numberに数字以外が含まれる場合は購入できない' do
         @buyer_address.telephone_number = '090-123-4567'
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it 'telephone_numberが9桁以下の場合は購入できない' do
+        @buyer_address.telephone_number = '09012345'
+        @buyer_address.valid?
+        expect(@buyer_address.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it 'telephone_numberが12桁以上の場合は購入できない' do
+        @buyer_address.telephone_number = '090123456712'
         @buyer_address.valid?
         expect(@buyer_address.errors.full_messages).to include('Telephone number is invalid')
       end
