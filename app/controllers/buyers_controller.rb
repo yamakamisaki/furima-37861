@@ -1,14 +1,13 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :set_item_id, only: [:index, :create]
 
   def index
     @buyer_address = BuyerAddress.new
-    @item = Item.find(params[:item_id])
     redirect_to root_path if @item.buyer.present? || current_user.id == @item.user_id
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buyer_address = BuyerAddress.new(buyer_params)
     if @buyer_address.valid?
       pay_item
@@ -20,6 +19,10 @@ class BuyersController < ApplicationController
   end
 
   private
+
+  def set_item_id
+    @item = Item.find(params[:item_id])
+  end
 
   def buyer_params
     params.require(:buyer_address).permit(:postal_code, :prefecture_id,
